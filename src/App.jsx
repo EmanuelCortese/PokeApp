@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import getPokemons from './services/getPokemons'
 import './App.css'
-import { PokeCard } from './components/PokeCard'
+import { PokeCard } from './components/PokeCard/PokeCard'
 import { GlobalStyles } from './styles/GlobalStyles'
 
 function App () {
