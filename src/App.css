@@ -2,3 +2,10 @@
   text-align: center;
 }
 
+.AppContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 5.5rem;
+  width: 85%;
+  margin: 10rem auto;
+}
