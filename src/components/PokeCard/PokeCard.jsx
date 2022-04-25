@@ -1,7 +1,7 @@
 import { CardContainer, CardID, CardImage, CardType, CardTypeContainer, CardTitle } from './style'
 export const PokeCard = ({ id, name, type, image }) => {
   return (
-    <CardContainer>
+    <CardContainer to={`detail/${id}`}>
       <CardID>#{id}</CardID>
       <CardImage loading='lazy' src={image} alt={name} />
       <CardTitle>{name}</CardTitle>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const backgroundType = ({ PokeType }) => {
@@ -41,7 +42,7 @@ const backgroundType = ({ PokeType }) => {
   }
 }
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(Link)`
     width: 20rem;
     border: .063rem solid #000000;
     border-radius: 1.3rem;
@@ -53,6 +54,10 @@ export const CardContainer = styled.div`
     background:  radial-gradient(circle, var(--first-backgroundColor-card) , var(--second-backgroundColor-card)); ;
     color: var(--color-card-primary);
     box-shadow: 0 0 1rem var(--color-primary);
+    transition: transform .6s ease;
+    :hover{
+      transform: scale(1.15);
+    }
 `
 export const CardID = styled.span`
     position: absolute;
