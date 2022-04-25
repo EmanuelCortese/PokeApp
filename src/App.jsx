@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { DETAIL, HOME } from './routes'
 
 import Home from './pages/Home'
@@ -13,7 +13,9 @@ function App () {
   return (
     <div className='App'>
       <GlobalStyles />
-      <img src={logo} className='AppLogo' />
+      <Link to='/'>
+        <img src={logo} className='AppLogo' />
+      </Link>
       <Routes>
         <Route path={HOME} element={<Home />} />
         <Route path={DETAIL} element={<Detail />} />
