@@ -16,9 +16,9 @@ const ApiResponse = ({ dataToShow } = {}) => {
   })
 }
 
-export default async function getPokemons () {
+export default async function getPokemons ({ limit = 20, page }) {
   // obtener url de cada pokemon
-  const res = await window.fetch(`${BASE_URL}/pokemon?limit=10&offset=0`)
+  const res = await window.fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${page * limit}`)
   const { results } = await res.json()
 
   // crear array de promesas con las urls obtenidas

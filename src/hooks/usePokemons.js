@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
 import getPokemons from '../services/getPokemons'
 
+const INITAL_PAGE = 0
+
 export const usePokemons = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(INITAL_PAGE)
+
+  const handleNextPage = () => {
+    setPage(page => page + 1)
+  }
 
   useEffect(() => {
     setLoading(true)
-    getPokemons().then(data => {
+    getPokemons({ page }).then(data => {
       setLoading(false)
-      setData(data)
+      setData((prevData) => prevData.concat(data))
     })
-  }, [setData])
+  }, [setData, page])
 
-  return { data, loading }
+  return { data, loading, handleNextPage }
 }
