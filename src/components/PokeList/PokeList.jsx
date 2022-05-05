@@ -1,12 +1,14 @@
 import { PokeCard } from '../PokeCard/PokeCard'
 import { usePokemons } from '../../hooks/usePokemons'
-import { PokemonList } from './style'
+import { PokemonList, PokemonListButton } from './style'
 
 export default function PokeList () {
-  const { data } = usePokemons()
+  const { data, handleNextPage } = usePokemons()
+
   return (
-    <PokemonList>
-      {
+    <>
+      <PokemonList>
+        {
                 data?.map(({ id, name, PokemonTypes, PokemonUrlImage }) => {
                   return (
                     <div key={id}>
@@ -20,6 +22,9 @@ export default function PokeList () {
                   )
                 })
               }
-    </PokemonList>
+      </PokemonList>
+
+      <PokemonListButton onClick={handleNextPage}>Load more</PokemonListButton>
+    </>
   )
 }
