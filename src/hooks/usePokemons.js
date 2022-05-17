@@ -8,10 +8,6 @@ export const usePokemons = () => {
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(INITAL_PAGE)
 
-  const handleNextPage = () => {
-    setPage(page => page + 1)
-  }
-
   useEffect(() => {
     setLoading(true)
     getPokemons({ page }).then(data => {
@@ -20,5 +16,5 @@ export const usePokemons = () => {
     })
   }, [setData, page])
 
-  return { data, loading, handleNextPage }
+  return { data, loading, setPage }
 }
