@@ -1,9 +1,20 @@
+import { useEffect, useRef, useCallback } from 'react'
 import { PokeCard } from '../PokeCard/PokeCard'
 import { usePokemons } from '../../hooks/usePokemons'
-import { PokemonList, PokemonListButton } from './style'
+import { useObserver } from '../../hooks/useObserver'
+import { PokemonList } from './style'
+import debounce from 'just-debounce-it'
 
 export default function PokeList () {
-  const { data, handleNextPage } = usePokemons()
+  const { data, loading, setPage } = usePokemons()
+  const externalRef = useRef()
+  const { isNearScreen } = useObserver({ once: false, externalRef: loading ? null : externalRef })
+
+  const debounceHandleNextPage = useCallback(debounce(() => setPage(page => page + 1), 400), [setPage])
+
+  useEffect(() => {
+    if (isNearScreen) debounceHandleNextPage()
+  }, [isNearScreen, debounceHandleNextPage])
 
   return (
     <>
@@ -24,7 +35,7 @@ export default function PokeList () {
               }
       </PokemonList>
 
-      <PokemonListButton onClick={handleNextPage}>Load more</PokemonListButton>
+      <div id='visor' ref={externalRef} />
     </>
   )
 }
