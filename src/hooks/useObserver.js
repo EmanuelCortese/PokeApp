@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useObserver = ({ distance = '1500px', once = true, externalRef }) => {
+export const useObserver = ({ distance = '100px', once = true, externalRef }) => {
   const [isNearScreen, setIsNearScreen] = useState(false)
 
   useEffect(() => {

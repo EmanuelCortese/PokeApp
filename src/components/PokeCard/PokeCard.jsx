@@ -1,5 +1,6 @@
+import React from 'react'
 import { CardContainer, CardID, CardImage, CardType, CardTypeContainer, CardTitle } from './style'
-export const PokeCard = ({ id, name, type, image }) => {
+function PokeCard ({ id, name, type, image }) {
   return (
     <CardContainer to={`detail/${id}`}>
       <CardID>#{id}</CardID>
@@ -13,3 +14,5 @@ export const PokeCard = ({ id, name, type, image }) => {
     </CardContainer>
   )
 }
+
+export default React.memo(PokeCard)

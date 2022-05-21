@@ -4,7 +4,7 @@ import { Spinner } from '../../components/Spinner/Spinner'
 import PokeList from '../../components/PokeList/PokeList'
 
 export default function Home () {
-  const { loading } = usePokemons()
+  const { loading } = usePokemons({ once: false })
   return (
     <>
       {

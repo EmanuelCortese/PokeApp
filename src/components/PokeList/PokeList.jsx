@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { PokeCard } from '../PokeCard/PokeCard'
+import PokeCard from '../PokeCard/PokeCard'
 import { usePokemons } from '../../hooks/usePokemons'
 import { useObserver } from '../../hooks/useObserver'
 import { PokemonList } from './style'
