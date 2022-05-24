@@ -10,9 +10,9 @@ const getUrlImage = ({ sprites }) => {
 }
 
 const getStats = ({ stats }) => {
-  return stats.map(({ base_stat, stat }) => {
+  return stats.map(({ base_stat: baseStat, stat }) => {
     const { name } = stat
-    return { name, baseStat: base_stat }
+    return { name, baseStat }
   })
 }
 
