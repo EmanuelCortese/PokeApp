@@ -7,6 +7,10 @@ export const GlobalStyles = createGlobalStyle`
         --first-backgroundColor-card: #8E44AD;
         --second-backgroundColor-card: #4A235A;
         --color-card-primary: #F4F4F4;
+        --color-blue: #3d7dca;
+        --color-yellow: #FFCB05;
+        --speed-normal: 0.8s;
+        --speed-fast: 0.4s;
     }
 
     body {
