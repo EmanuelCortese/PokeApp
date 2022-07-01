@@ -1,46 +1,36 @@
+import { idNumber } from '../../utils/idNumber'
 import {
   FirstPokeBackground,
   PokeDetailContainer,
-  PokeDetailId,
-  PokeDetailImg,
-  PokeDetailTitle,
   PokeDetailType,
   SecondPokeBackground,
-  BaseStatsContainer,
-  BaseStats,
-  StatsTitle,
   BarStats,
-  BackgroundBarStats,
-  Stats,
-  BaseStatistics
+  BackgroundBarStats
 } from './style'
 
+const convertUnit = (unit) => {
+  return reduceDecimals(unit * 0.1)
+}
+
+const reduceDecimals = (unit) => {
+  return unit.toFixed(1)
+}
+
 export const PokeDetail = ({ id, name, image, types, specie, height, weight, stats }) => {
-  const idNumb = id.toString().length === 1
-    ? `#00${id}`
-    : id.toString().length === 2 ? `#0${id}` : `#${id}`
+  const PokeHeight = convertUnit(height)
 
-  // Convertir decimetros a metros
-  const decimeterToMeter = height * 0.1
-  // Reducir los decimales a 1
-  const Pokeheight = decimeterToMeter.toFixed(1)
+  const PokeWeight = convertUnit(weight)
 
-  // Convertir hectogramos a kilogramos
-  const hectogramsToKilograms = weight * 0.1
-
-  const Pokeweight = hectogramsToKilograms.toFixed(1)
-
-  // Quitar la palabra Pokémos del final
   const PokeSpecies = specie.replace('Pokémon', '')
 
   return (
     <PokeDetailContainer>
       <FirstPokeBackground>
-        <PokeDetailTitle>{name}</PokeDetailTitle>
-        <PokeDetailId>{idNumb}</PokeDetailId>
+        <h2>{name}</h2>
+        <span>{idNumber({ id })}</span>
       </FirstPokeBackground>
 
-      <PokeDetailImg src={image} alt='Pokemon Detail' />
+      <img src={image} alt='Pokemon Detail' />
 
       <SecondPokeBackground>
         <div>
@@ -49,33 +39,33 @@ export const PokeDetail = ({ id, name, image, types, specie, height, weight, sta
             }
         </div>
 
-        <BaseStatsContainer flex='flex'>
-          <BaseStats>
-            <StatsTitle>Species</StatsTitle>
-            <Stats>{PokeSpecies}</Stats>
-          </BaseStats>
-          <BaseStats border='isBorder'>
-            <StatsTitle>Height</StatsTitle>
-            <Stats>{Pokeheight} m</Stats>
-          </BaseStats>
-          <BaseStats border='isBorder'>
-            <StatsTitle>Weight</StatsTitle>
-            <Stats>{Pokeweight} kg</Stats>
-          </BaseStats>
-        </BaseStatsContainer>
+        <div>
+          <div>
+            <h3>Species</h3>
+            <span>{PokeSpecies}</span>
+          </div>
+          <div>
+            <h3>Height</h3>
+            <span>{PokeHeight} m</span>
+          </div>
+          <div>
+            <h3>Weight</h3>
+            <span>{PokeWeight} kg</span>
+          </div>
+        </div>
 
-        <BaseStatsContainer flex='flex' direction='column' gap='gap' fullHeight='true'>
-          <StatsTitle>Base Stats</StatsTitle>
+        <div>
+          <h3>Base Stats</h3>
           {stats.map(({ name, baseStat }) => (
-            <BaseStatistics key={name}>
-              <Stats>{name}</Stats>
-              <Stats size='isSmall' textAlign='center' bold='isBold'>{baseStat}</Stats>
-              <BarStats bgStat={name} opacity='true'>
-                <BackgroundBarStats bgStat={name} baseStat={baseStat} />
+            <div key={name}>
+              <span>{name}</span>
+              <span size='isSmall' bold='isBold'>{baseStat}</span>
+              <BarStats bgStat={name} opacity='.3'>
+                <BackgroundBarStats opacity='1' bgStat={name} baseStat={baseStat} />
               </BarStats>
-            </BaseStatistics>)
+            </div>)
           )}
-        </BaseStatsContainer>
+        </div>
 
       </SecondPokeBackground>
 
