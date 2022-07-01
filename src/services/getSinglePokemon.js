@@ -28,6 +28,10 @@ const ApiResponse = async (results) => {
 
 export default async function getSinglePokemon ({ id }) {
   const res = await window.fetch(`${BASE_URL}/pokemon/${id}`)
+  if (res.status !== 200) {
+    const { url, status } = res
+    throw Error(`Error: ${status} in fetch ${url}`)
+  }
   const results = await res.json()
 
   return ApiResponse(results)
