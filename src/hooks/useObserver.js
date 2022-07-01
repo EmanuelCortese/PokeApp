@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import Context from '../context/PokeContext'
+import { useState, useEffect, useContext } from 'react'
 
 export const useObserver = ({ distance = '100px', once = true, externalRef }) => {
   const [isNearScreen, setIsNearScreen] = useState(false)
+  const { data } = useContext(Context)
 
   useEffect(() => {
     let observer
 
-    const observerChanges = (entries, observer) => {
-      const element = entries[0]
+    const observerChanges = ([element], observer) => {
       if (element.isIntersecting) {
         setIsNearScreen(true)
         once && observer.disconnect()
@@ -22,7 +23,7 @@ export const useObserver = ({ distance = '100px', once = true, externalRef }) =>
       observer = new window.IntersectionObserver(observerChanges, {
         rootMargin: distance
       })
-      if (externalRef.current !== null && externalRef) observer.observe(externalRef.current)
+      if (externalRef.current !== null && externalRef && data) observer.observe(externalRef.current)
     })
 
     return () => observer && observer.disconnect()
