@@ -3,7 +3,7 @@ import PokeCard from '../PokeCard/PokeCard'
 import { usePokemons } from '../../hooks/usePokemons'
 import { useObserver } from '../../hooks/useObserver'
 import { PokemonList } from './style'
-import debounce from 'just-debounce-it'
+import { debounce } from 'lodash'
 
 export default function PokeList () {
   const { data, loading, setPage } = usePokemons()
@@ -15,24 +15,23 @@ export default function PokeList () {
   useEffect(() => {
     if (isNearScreen) debounceHandleNextPage()
   }, [isNearScreen, debounceHandleNextPage])
-
   return (
     <>
       <PokemonList>
-        {
-                data?.map(({ id, name, PokemonTypes, PokemonUrlImage }) => {
-                  return (
-                    <div key={id}>
-                      <PokeCard
-                        name={name}
-                        id={id}
-                        type={PokemonTypes}
-                        image={PokemonUrlImage}
-                      />
-                    </div>
-                  )
-                })
-              }
+        {!data.length
+          ? <span>No hay Pokemones</span>
+          : data?.map(({ id, name, PokemonTypes, PokemonUrlImage }, index) => {
+            return (
+              <div key={index}>
+                <PokeCard
+                  name={name}
+                  id={id}
+                  type={PokemonTypes}
+                  image={PokemonUrlImage}
+                />
+              </div>
+            )
+          })}
       </PokemonList>
 
       <div id='visor' ref={externalRef} />
