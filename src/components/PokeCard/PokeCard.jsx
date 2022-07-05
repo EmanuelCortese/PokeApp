@@ -1,16 +1,20 @@
 import React from 'react'
-import { CardContainer, CardID, CardImage, CardType, CardTypeContainer, CardTitle } from './style'
+import { idNumber } from '../../utils/idNumber'
+import { CardContainer, CardType } from './style'
+
 function PokeCard ({ id, name, type, image }) {
   return (
     <CardContainer to={`detail/${id}`}>
-      <CardID>#{id}</CardID>
-      <CardImage loading='lazy' src={image} alt={name} />
-      <CardTitle>{name}</CardTitle>
-      <CardTypeContainer>
+      <span>{idNumber({ id })}</span>
+      <img loading='lazy' src={image} alt={name} />
+      <h2>{name}</h2>
+      <div>
         {
-            type?.map(type => <CardType PokeType={type} key={type}>{type}</CardType>)
+            type?.map((type, index) => {
+              return <CardType PokeType={type} key={index}>{type}</CardType>
+            })
         }
-      </CardTypeContainer>
+      </div>
     </CardContainer>
   )
 }
