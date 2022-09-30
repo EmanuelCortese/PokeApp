@@ -25,29 +25,27 @@ const colorType = {
 
 export const CardContainer = styled(Link)`
     width: 20rem;
-    border: .063rem solid #000000;
+    border: .063rem solid var(--color-secondary, #18171C);
     border-radius: 1.3rem;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background:  radial-gradient(circle, var(--first-backgroundColor-card) , var(--second-backgroundColor-card)); ;
-    color: var(--color-card-primary);
-    box-shadow: 0 0 1rem var(--color-primary);
+    background: radial-gradient(circle, var(--background-secondary, #F0EFF6) 65%, var(--background-primary, #18171C));
+    box-shadow: 0 0 1rem var(--color-primary, #F4F4F4);
     transition: transform .6s ease;
     :hover{
       transform: scale(1.15);
     }
     >span{
         position: absolute;
-        color: var(--color-card-primary);
+        color: var(--color-secondary, #18171C);
         right: 0;
         top: 0;
         margin: 1rem 1rem 0 0;
         font-weight: bold;
         font-size: 1.4rem;
-        -webkit-text-stroke: .07rem #000000;
     }
     >img{
         width: 8rem;
@@ -59,7 +57,7 @@ export const CardContainer = styled(Link)`
         margin: 0;
         font-weight: bold;
         font-size: 2rem;
-        -webkit-text-stroke: .09rem #000000;
+        color: var(--color-secondary, #18171C);
         :first-letter{
             text-transform: uppercase;
         }
@@ -75,11 +73,11 @@ export const CardType = styled.span`
     margin: .6rem;
     font-size: 1.1rem;
     font-weight: 600;
-    border: 0.065rem solid var(--color-primary);
-    box-shadow: 0 0 .9rem var(--color-primary);
+    border: 0.065rem solid var(--color-secondary, #18171C);
+    box-shadow: 0 0 .9rem var(--color-secondary, #18171C);
     border-radius: 2rem;
     text-align: center;
-    color: var(--color-primary);
+    color: #18171C;
     background: ${({ PokeType }) => colorType[PokeType] ?? colorType.default};
     :first-letter{
         text-transform: uppercase;

@@ -14,10 +14,11 @@ const backgroundStat = ({ opacity }) => {
 }
 
 export const PokeDetailContainer = styled.div`
+    background: var(--background-primary, #18171C);
     width: 30rem;
     height: 45rem;
     margin: 0  auto 2rem auto;
-    border: 0.125rem solid var(--color-primary);
+    border: 0.125rem solid var(--color-primary, #F4F4F4);
     border-radius: 1.99rem;
     position: relative;
     >img{
@@ -30,13 +31,13 @@ export const PokeDetailContainer = styled.div`
 
 export const FirstPokeBackground = styled.div`
     position: relative;
-    background: linear-gradient(to bottom, var(--first-backgroundColor-card), var(--second-backgroundColor-card));
+    background: linear-gradient(to top, var(--color-primary, #F4F4F4), var(--color-secondary, #18171C));
     height: 20rem; 
     clip-path: ellipse(110% 95% at 50% 0);
     border-top-left-radius: 1.9rem;
     border-top-right-radius: 1.9rem;
     >h2{
-        color: var(--color-card-primary);
+        color: var(--color-primary, #F4F4F4);
         margin: 0;
         top: 2rem;
         left: 2rem;
@@ -50,7 +51,7 @@ export const FirstPokeBackground = styled.div`
         }
     }
     >span{
-        color: var(--color-card-primary);
+        color: var(--color-primary, #F4F4F4);
         position: absolute;
         top: 2rem;
         right: 2rem;
@@ -68,6 +69,7 @@ export const SecondPokeBackground = styled.div`
     top: 20rem;
     height: 50%;
     width: 100%;
+    color: var(--color-primary, #F4F4F4);
     >div:nth-child(2){
         display: flex;
         justify-content: center;
@@ -78,7 +80,7 @@ export const SecondPokeBackground = styled.div`
         >div:nth-child(2), >div:nth-child(3){
             width: 10rem;
             margin: 0 .8rem;
-            border-left: solid .1rem var(--first-backgroundColor-card);
+            border-left: solid .1rem var(--color-primary, #F4F4F4);
         }
         >div > h3{
             font-weight: bold;
@@ -90,7 +92,7 @@ export const SecondPokeBackground = styled.div`
             font-weight: bold;
             text-align: justify;
             text-transform: uppercase;
-            font-size: .9rem;
+            font-size: 1.1rem;
         }
     }
     >div:nth-child(3){
@@ -130,6 +132,7 @@ export const PokeDetailType = styled(CardType)`
         padding: .2rem 1.8rem;
         margin: .8rem;
         font-size: 1.4rem;
+        border: .09rem solid var(--color-primary, #F4F4F4);
     `
 
 export const BarStats = styled.div`
