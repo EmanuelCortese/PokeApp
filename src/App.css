@@ -2,4 +2,7 @@
 
 .App {
   text-align: center;
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--background-primary, #18171C);
 }
