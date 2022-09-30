@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     #dark{
-      --bacKground-primary:  #18171C;
+      --background-primary:  #18171C;
       --background-secondary: #F0EFF6;
       --color-primary: #F4F4F4;
       --color-secondary: #18171C;
@@ -20,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
       }
 
     #light{
-      --bacKground-primary: #F0EFF6;
+      --background-primary: #F0EFF6;
       --background-secondary: #18171C;
       --color-primary: #18171C;
       --color-secondary: #F4F4F4;
@@ -29,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        background-color: var(--bacKground-primary,  #18171C);
+        background-color: var(--background-primary,  #18171C);
         color: var(--color-primary);
         margin: 0;
         font-family: Tahoma;
