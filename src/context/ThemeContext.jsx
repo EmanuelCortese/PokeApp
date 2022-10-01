@@ -1,18 +1,10 @@
-import { createContext, useState } from 'react'
+import { useTheme } from '../hooks/useTheme'
+import { createContext } from 'react'
 
 const Context = createContext({})
 
 export const ThemeProvider = ({ children }) => {
-  const mode = window.localStorage.getItem('themeMode')
-  const currentMode = JSON.parse(mode) ?? 'dark'
-
-  const [userTheme, setTheme] = useState(currentMode)
-
-  const changeTheme = () => {
-    const theme = userTheme === 'dark' ? 'light' : 'dark'
-    setTheme(theme)
-    window.localStorage.setItem('themeMode', JSON.stringify(theme))
-  }
+  const { userTheme, changeTheme } = useTheme()
 
   return (
     <Context.Provider value={{ userTheme, changeTheme }}>
