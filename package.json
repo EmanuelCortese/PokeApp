@@ -17,12 +17,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "1.0.7",
+    "eslint-config-prettier": "^8.5.0",
     "standard": "16.0.4",
     "vite": "2.9.0"
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/standard/eslintrc.json"
+      "./node_modules/standard/eslintrc.json",
+      "prettier"
     ]
   }
 }
