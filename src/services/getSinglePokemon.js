@@ -2,7 +2,7 @@ import { BASE_URL } from '../../config'
 import getSinglePokemonSpecies from './getSinglePokemonSpecies'
 
 const getTypes = ({ types }) => {
-  return types?.map(el => el.type.name)
+  return types?.map((el) => el.type.name)
 }
 
 const getUrlImage = ({ sprites }) => {
@@ -26,7 +26,7 @@ const ApiResponse = async (results) => {
   return { id, name, height, weight, PokemonTypes, PokemonUrlImage, PokemonSpecies, PokemonStats }
 }
 
-export default async function getSinglePokemon ({ id }) {
+export default async function getSinglePokemon({ id }) {
   const res = await window.fetch(`${BASE_URL}/pokemon/${id}`)
   if (res.status !== 200) {
     const { url, status } = res
