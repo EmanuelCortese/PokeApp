@@ -1,11 +1,14 @@
+import { useContext, useEffect } from 'react'
+import noImage from '../../assets/No-Image.png'
+import { PokeContext } from '../../context/PokeContext'
 import { idNumber } from '../../utils/idNumber'
 import {
+  BackgroundBarStats,
+  BarStats,
   FirstPokeBackground,
   PokeDetailContainer,
   PokeDetailType,
   SecondPokeBackground,
-  BarStats,
-  BackgroundBarStats
 } from './style'
 
 const convertUnit = (unit) => {
@@ -17,11 +20,13 @@ const reduceDecimals = (unit) => {
 }
 
 export const PokeDetail = ({ id, name, image, types, specie, height, weight, stats }) => {
+  const { dispatch } = useContext(PokeContext)
+  useEffect(() => dispatch({ type: 'reset_pokemons' }), [])
   const PokeHeight = convertUnit(height)
 
   const PokeWeight = convertUnit(weight)
 
-  const PokeSpecies = specie.replace('Pokémon', '')
+  const PokeSpecies = specie?.replace('Pokémon', '')
 
   return (
     <PokeDetailContainer>
@@ -30,13 +35,15 @@ export const PokeDetail = ({ id, name, image, types, specie, height, weight, sta
         <span>{idNumber({ id })}</span>
       </FirstPokeBackground>
 
-      <img src={image} alt='Pokemon Detail' />
+      <img src={image ?? noImage} alt='Pokemon Detail' />
 
       <SecondPokeBackground>
         <div>
-          {
-                types.map((type, index) => <PokeDetailType PokeType={type} key={index}>{type}</PokeDetailType>)
-            }
+          {types?.map((type, index) => (
+            <PokeDetailType PokeType={type} key={index}>
+              {type}
+            </PokeDetailType>
+          ))}
         </div>
 
         <div>
@@ -56,19 +63,19 @@ export const PokeDetail = ({ id, name, image, types, specie, height, weight, sta
 
         <div>
           <h3>Base Stats</h3>
-          {stats.map(({ name, baseStat }) => (
+          {stats?.map(({ name, baseStat }) => (
             <div key={name}>
               <span>{name}</span>
-              <span size='isSmall' bold='isBold'>{baseStat}</span>
+              <span size='isSmall' bold='isBold'>
+                {baseStat}
+              </span>
               <BarStats bgStat={name} opacity='.3'>
                 <BackgroundBarStats opacity='1' bgStat={name} baseStat={baseStat} />
               </BarStats>
-            </div>)
-          )}
+            </div>
+          ))}
         </div>
-
       </SecondPokeBackground>
-
     </PokeDetailContainer>
   )
 }
