@@ -1,7 +1,7 @@
 import { BASE_URL } from '../../config'
 
 const getTypes = ({ types }) => {
-  return types?.map(el => el.type.name)
+  return types?.map((el) => el.type.name)
 }
 
 const getUrlImage = ({ sprites }) => {
@@ -16,7 +16,7 @@ const ApiResponse = ({ dataToShow } = {}) => {
   })
 }
 
-export default async function getPokemons ({ limit = 20, page = 0 } = {}) {
+export default async function getPokemons({ limit = 20, page = 0 } = {}) {
   const res = await window.fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${page * limit}`)
 
   if (res.status !== 200) {
@@ -25,9 +25,9 @@ export default async function getPokemons ({ limit = 20, page = 0 } = {}) {
   }
 
   const { results } = await res.json()
-  const promises = results.map(({ url }) => window.fetch(url).then(res => res.json()))
+  const promises = results.map(({ url }) => window.fetch(url).then((res) => res.json()))
   const resPromiseAll = await Promise.allSettled(promises)
-  const dataToShow = resPromiseAll.map(res => res.value)
+  const dataToShow = resPromiseAll.map((res) => res.value)
 
   return ApiResponse({ dataToShow })
 }
