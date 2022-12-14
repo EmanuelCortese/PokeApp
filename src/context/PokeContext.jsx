@@ -1,18 +1,47 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 
-const Context = React.createContext({})
+export const PokeContext = React.createContext({})
 
-const INITAL_PAGE = 0
-export const PokeProvider = ({ children }) => {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const [page, setPage] = useState(INITAL_PAGE)
-  return (
-    <Context.Provider value={{ data, setData, loading, setLoading, error, setError, page, setPage }}>
-      {children}
-    </Context.Provider>
-  )
+const reducer = (state, action) => {
+  if (action.type === 'update_pokemons') {
+    return {
+      ...state,
+      data: [...state.data, ...action.payload],
+    }
+  }
+  if (action.type === 'reset_pokemons') {
+    return {
+      ...state,
+      data: [],
+    }
+  }
+  if (action.type === 'update_match') {
+    return {
+      ...state,
+      matches: action.payload,
+    }
+  }
+  if (action.type === 'update_all_pokemons') {
+    return {
+      ...state,
+      alldata: action.payload,
+    }
+  }
+  if (action.type === 'update_keyword') {
+    return {
+      ...state,
+      keyword: action.payload,
+    }
+  }
 }
 
-export default Context
+export const PokeProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    data: [],
+    alldata: [],
+    keyword: '',
+    matches: [],
+  })
+
+  return <PokeContext.Provider value={{ state, dispatch }}>{children}</PokeContext.Provider>
+}
