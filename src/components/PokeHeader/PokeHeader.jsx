@@ -1,21 +1,30 @@
-import { Link } from 'react-router-dom'
-import { PokeHeaderMain, PokeHeaderTitle } from './style'
-import logo from '../../assets/Logo.png'
-import { PokeLogo } from '../PokeLogo/PokeLogo'
-import { BsSearch, BsSun, BsMoonStarsFill } from 'react-icons/bs'
-import { AiOutlineUser } from 'react-icons/ai'
-import Context from '../../context/ThemeContext'
 import { useContext } from 'react'
+import { AiOutlineUser } from 'react-icons/ai'
+import { BsMoonStarsFill, BsSearch, BsSun } from 'react-icons/bs'
+import logo from '../../assets/Logo.png'
+import Context from '../../context/ThemeContext'
+import { useSearchPokemons } from '../../hooks/useSearchPokemons'
+import { PokeLogo } from '../PokeLogo/PokeLogo'
+import { PokeHeaderMain, PokeHeaderTitle } from './style'
 
-export const PokeHeader = ({ show, title, margin }) => {
+const PokeHeader = ({ show, title, margin, get = true, visible = true } = {}) => {
   const { changeTheme } = useContext(Context)
+  const { handleKeyword } = useSearchPokemons({ get })
+  const keywordValue = window.localStorage.getItem('keyword') ?? ''
   return (
     <PokeHeaderMain>
       <div>
         <PokeLogo width='100%' widhtcontainer='5rem' />
         <div>
           <BsSearch />
-          <input type='text' />
+          {visible && (
+            <input
+              type='text'
+              value={keywordValue}
+              onChange={(e) => handleKeyword(e)}
+              placeholder='Search a Pokemon by name...'
+            />
+          )}
         </div>
         <div>
           <label className='switchBackgound' htmlFor='switch'>
@@ -27,16 +36,11 @@ export const PokeHeader = ({ show, title, margin }) => {
           <AiOutlineUser />
         </div>
       </div>
-      {show && (
-        <Link to='/'>
-          <img src={logo} />
-        </Link>
-      )}
+      {show && <img src={logo} />}
 
-      <PokeHeaderTitle margin={margin}>
-        {title}
-      </PokeHeaderTitle>
-
+      <PokeHeaderTitle margin={margin}>{title}</PokeHeaderTitle>
     </PokeHeaderMain>
   )
 }
+
+export default PokeHeader
