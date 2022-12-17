@@ -1,5 +1,5 @@
-import { HOME } from '../../routes'
 import LogoHeader from '../../assets/Logo_Header.png'
+import { HOME } from '../../routes'
 import { LogoContainer } from './style'
 
 export const PokeLogo = ({ width, margin, position, widhtcontainer }) => {
