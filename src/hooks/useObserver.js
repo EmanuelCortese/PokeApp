@@ -1,10 +1,11 @@
-import Context from '../context/PokeContext'
-import { useState, useEffect, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { PokeContext } from '../context/PokeContext'
 
-export const useObserver = ({ distance = '100px', once = true, externalRef }) => {
+export const useObserver = ({ distance = '250px', once = true, externalRef }) => {
   const [isNearScreen, setIsNearScreen] = useState(false)
-  const { data } = useContext(Context)
-
+  const {
+    state: { data },
+  } = useContext(PokeContext)
   useEffect(() => {
     let observer
 
@@ -21,7 +22,7 @@ export const useObserver = ({ distance = '100px', once = true, externalRef }) =>
       typeof window.IntersectionObserver !== 'undefined' ? window.IntersectionObserver : import('intersection-observer')
     ).then(() => {
       observer = new window.IntersectionObserver(observerChanges, {
-        rootMargin: distance
+        rootMargin: distance,
       })
       if (externalRef.current !== null && externalRef && data) observer.observe(externalRef.current)
     })
